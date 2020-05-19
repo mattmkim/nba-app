@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.impute import SimpleImputer
+import joblib
 
 stats = pd.read_csv("Seasons_Stats.csv")
 all_nba = pd.read_csv("All.NBA.1984-2018.csv")
@@ -125,6 +126,8 @@ for score in scores:
 
 sv_classifier = SVC(kernel="linear", C=0.01)
 sv_classifier.fit(x_train, y_train)
+
+joblib.dump(sv_classifier, "./sv_classifier.joblib", compress=True)
 
 y_predicted = sv_classifier.predict(x_test)
 
